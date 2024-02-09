@@ -335,10 +335,9 @@ public class SortShow extends JPanel {
 	public int partition(int low, int high) {
 		int pivot = lines_lengths[high];
 		int i = (low - 1);
-		for (int j = low; j < high; j++) {
+		for (int j = low; j <= high; ++j) {
 			if (lines_lengths[j] < pivot) {
-				i++;
-				swap(i, j);
+				swap(++i, j);
 				//redrawing the lines_lengths
 				paintComponent(this.getGraphics());
 				//Causing a delay for 10ms
@@ -350,7 +349,7 @@ public class SortShow extends JPanel {
 		//Causing a delay for 10ms
 		delay(10);
 		swap(i + 1, high);
-		return (i + 1);
+		return (++i);
 	}
 
 
