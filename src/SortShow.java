@@ -1,6 +1,7 @@
 /**
  *
  * @author Ouda
+ * and Group 24
  */
 
 //importing the libraries that will be needed in this program
