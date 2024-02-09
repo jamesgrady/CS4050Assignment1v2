@@ -258,9 +258,6 @@ public class SortShow extends JPanel {
 		Calendar start = Calendar.getInstance();
 		if (low < high) {
 			int partitionIndex = partition(low, high);
-
-			// Separately sort elements before
-			// partition and after partition
 			RquickSort(low, partitionIndex - 1);
 			RquickSort(partitionIndex + 1, high);
 		}
