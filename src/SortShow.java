@@ -130,6 +130,13 @@ public class SortShow extends JPanel {
 
 			//You need to complete this part.
 
+			int[]  temp_array = lines_lengths;
+
+			int first = 0;
+			int last = total_number_of_lines -1;
+
+			R_MergeSort(first, last);
+
 			Calendar end = Calendar.getInstance();
 			//getting the time it took for the iterative merge sort to execute
 			//subtracting the end time with the start time
@@ -142,8 +149,20 @@ public class SortShow extends JPanel {
 
 				//You need to complete this part.
 
+				// Divide
+				int mid = (first + last) / 2;
+
+				// Recur
+				R_MergeSort(first, mid);
+				R_MergeSort(mid+1, last);
+
+				// Conquer
+				R_Merge(first, mid, last);
+
+				paintComponent(this.getGraphics());
+
 				//Causing a delay for 10ms
-				delay(10); 
+				delay(10);
 			}
 		}
 
@@ -152,7 +171,52 @@ public class SortShow extends JPanel {
 		public void R_Merge(int first, int mid, int last){
 
 			//You need to complete this part.
-				
+
+
+			//You need to complete this part
+			// Merges the adjacent subarrays a[first...mid] and a[mid+1...last].
+			int beginHalf1 = first;
+			int endHalf1 = mid;
+			int beginHalf2 = mid + 1;
+			int endHalf2 = last;
+			int[] tempArray = new int[lines_lengths.length];
+			int index = first;
+
+			// While both subarrays are not empty, compare an element in one subarray with
+			// an element in the other; then copy the smaller item into the temporary array
+			// index = 0 next available location in tempArray
+			while ((beginHalf1 <= endHalf1) && (beginHalf2 <= endHalf2)) {
+				if (lines_lengths[beginHalf1] < lines_lengths[beginHalf2]) {
+					tempArray[index] = lines_lengths[beginHalf1];
+					beginHalf1++;
+				} else {
+					//lines_lengths[index] = lines_lengths[beginHalf2];
+					tempArray[index] = lines_lengths[beginHalf2];
+					//swap(index, beginHalf1);
+					beginHalf2++;
+				}
+				index++;
+			}
+
+			// Copy the remaining elements from the first half, if any
+			while (beginHalf1 <= endHalf1) {
+				tempArray[index] = lines_lengths[beginHalf1];
+				beginHalf1++;
+				index++;
+			}
+
+			// Copy the remaining elements from the second half, if any
+			while (beginHalf2 <= endHalf2) {
+				tempArray[index] = lines_lengths[beginHalf2];
+				beginHalf2++;
+				index++;
+			}
+
+			// Copy the merged elements from tempArray back to lines_lengths
+			for (index = first; index <= last; index++) {
+				lines_lengths[index] = tempArray[index];
+				paintComponent(this.getGraphics());
+			}
 		}
 
 
